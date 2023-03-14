@@ -1,0 +1,59 @@
+#form1{
+		margin-left:60%;
+		border:1px;
+		border-radius:10% solid black;
+		height:20px;
+	}
+	.search{
+		margin-top: 1%;
+		border:1px solid black;
+		border-radius:20px;
+		height:35px;
+	}
+	.bg-gray{
+		display:flex;
+		background: gray
+
+	}
+	h3{
+		background: gray;
+		color:white;
+	}
+	.btn{
+	color:white;
+	}
+	#left-align{
+		color:white;
+		width:10%;
+		margin-left:85%;
+		background: gray;
+	}
+	#emplist{
+		margin-top:2%;
+	}
+	@media screen and (min-width: 480px) {
+  .bg-gray{
+  	width:612px;
+		}
+		#form1{
+		margin-left:45%;
+	
+	}
+
+}
+@media screen and (min-width: 750px) {
+  .bg-gray{
+  	width:790px;}
+		#form1{
+		margin-left:50%;
+	}
+}
+@media screen and (min-width: 900px) {
+  .bg-gray{
+  	width:auto;}
+		#form1{
+		margin-left:60%;
+		
+	}
+
+}

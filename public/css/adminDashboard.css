@@ -1,0 +1,49 @@
+ #right-side-bar{
+         margin-left:82% !important;
+         width:10%;
+         }
+         .list-group-item{
+            width:200px;
+         background: gray;
+         color:white;
+         }
+         #head{
+         list-style: none;
+         color:white;
+         background: gray;
+         }
+         a{
+         color:white;
+         }
+         #left-side-bar{
+         color:white;
+         margin-top:-7%;
+         width:20%;
+         }
+         
+
+       @media screen and (min-width:480px){
+         #right-side-bar{
+         margin-left:78%;
+         color:black;
+         width:10%;
+         }
+         #head{
+            width:730px;
+         color:white;
+         background: gray;
+         }
+         }
+      @media screen and (min-width:600px){
+         #right-side-bar{
+         margin-left:78%;
+         width:10%;
+         }
+         #head{
+            height:70px;
+            list-style: none;
+            width:100%;
+            color:white;
+            background: gray;
+         }
+         }
