@@ -24,10 +24,10 @@ class ExampleTest extends TestCase
         // dd($response);
         $response->assertStatus(302);
        
-         $response1 = $this->post('empDataSubmit',['id'=>'125','FirstName'=>'gopi1','LastName'=>'krishna','Skills'=>'php,java','StratDate'=>'2023-03-03']);
+         $response1 = $this->post('empDataSubmit',['id'=>'125','FirstName'=>'gopi','LastName'=>'krishna','Skills'=>'php,java','StratDate'=>'2023-03-03']);
          dd($response);
         $response1->assertStatus(302);
-         $response2 = $this->post('empUpdateDataSubmit',['id'=>'125','FirstName'=>'gopi1','LastName'=>'krishna','Skills'=>'php,java','StratDate'=>'2023-03-03']);
+         $response2 = $this->post('empUpdateDataSubmit',['id'=>'125','FirstName'=>'gopi','LastName'=>'krishna','Skills'=>'php,java','StratDate'=>'2023-03-03']);
          // dd($response);
         $response2->assertStatus(302);
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\employeeController;
+use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\adminController;
 use App\Http\Middleware\employeeMiddleware;
 
@@ -22,12 +23,12 @@ Route::get('/', function () {
 Route::get('registration',function(){
   return view('registration');
 });
-Route::post('registartionSubmit',[employeeController::class,'registrationDataStore']);
+Route::post('registartionSubmit',[AuthenticateController::class,'registrationDataStore']);
 
 Route::get('loginNew',function(){
   return view('adminlogin');
 });
-Route::post('loginCheck',[employeeController::class,'checkLogin']);
+Route::post('loginCheck',[AuthenticateController::class,'checkLogin']);
 
 
 // add middleware 
