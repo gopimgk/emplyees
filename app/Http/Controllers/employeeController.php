@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 //use Request;
+use App\Http\Requests\empRequest;
 use Illuminate\Http\Request;
 use App\Models\userdata;
 use App\Models\User;
@@ -18,50 +19,6 @@ class employeeController extends Controller{
   return view('adminlogin');
  }
 
- public function registrationDataStore(Request $request){
-  $validatior=$request->validate([
- 'name' => 'required|alpha|max:10',
- 'role' => 'required|alpha|max:10',
- 'email' => 'required',
- 'password' => 'required|min:8',
-]);
- $data=new User;
- $data->name=$request->name;
- $data->role=$request->role;
- $data->email=$request->email;
- $data->password=Hash::make($request->password);
- $data->save();
-return  redirect('loginNew');
-}
-//check login details from database
-public function checkLogin(Request $request){
-  	    // dd(123);
-  	    $request->validate([
-  	 	'email' => 'required',
-     	'password' => 'required|min:8'
-     	// 'g-recaptcha-response' => 'required'
-   	]);
-  	    // dd(123);
- 	if(Auth::attempt($request->only(['email','password']), $request->get('remember'))){
-		if(Auth::user()->role=='admin'){ 
-		    return redirect('empList')->with('message','admin login successfully');
-		}
-		else{
-		  	return redirect('userdashboard')->with('message','user login successfully');
-		}
-	}
-	elseif (Auth::guard('weber')->attempt($request->only(['email','password']), $request->get('remember'))){
-		if(Auth::guard('weber')->user()->role=='admin'){
-		    return redirect('empList');
-		}else{
-		    return redirect('userdashboard');
-		}
-		}
-	else{
-		return back()->with('message', 'please enter currect details.');
-		}
-}
-
 public function userDashboard(Request $req){
  	$data=Employees::select('*')->get();
  	$data=Employees::paginate(3);
@@ -69,14 +26,7 @@ public function userDashboard(Request $req){
 }
 
 //employee create form data storein databade
-public function empDataStore(Request $req){
-	$req->validate([
-	'id' => 'required|Numeric',
-	'FirstName' => 'required|alpha|max:10',
-	'LastName' => 'required|alpha|max:10',
-	'skill'  => 'required',
-	'StartDate'  => 'required',
-	]);
+public function empDataStore(empRequest $req){
 	$data=new Employees;
 	$data->EmployeeId=$req->id;
 	$data->FirstName= ucfirst($req->FirstName);
@@ -105,14 +55,7 @@ public function edit(Request $request){
 	return response()->json($data);
 }
 //update data store in database
-public function empUpdateDataStore(Request $request){
-	$request->validate([
-	'id' => 'required|Numeric',
-	'FirstName' => 'required|alpha|max:10',
-	'LastName' => 'required|alpha|max:10',
-	'skill'  => 'required',
-	'StartDate'  => 'required',
-]);
+public function empUpdateDataStore(empRequest $request){
 $data=Employees::where('EmployeeId',$request->id)->first();
 if($data){
  	$data->EmployeeId=$request->id;
@@ -140,6 +83,8 @@ public function Users(Request $req){
 	return view('admin.Users')->with('data',$data);
 }
 
+//search buttons functions
+
 public function searchEmp(Request $request){
 	if($request->ajax()){
 		// $search=Employees::paginate(3);
@@ -152,7 +97,6 @@ public function searchEmp(Request $request){
 	  return  response()->json($search);
 	}
 }
-
 public function searchnonAdmin(Request $request){
 	if($request->ajax()){
 	$search=Employees::where('FirstName','like','%'.$request->search.'%')
